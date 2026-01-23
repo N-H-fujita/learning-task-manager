@@ -1,13 +1,14 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function App() {
-  const [tasks, setTasks] = useState([
-    {
-      id: 1,
-      title: '最初のタスク',
-      completed: false,
-    },
-  ]);
+
+  const [tasks, setTasks] = useState(() => {
+    const saved = localStorage.getItem("tasks");
+    return saved ? JSON.parse(saved) : [];
+  });
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  })
   const toggleCompleted = (id) => {
     setTasks(
       tasks.map((task) =>
