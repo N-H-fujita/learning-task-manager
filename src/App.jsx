@@ -8,7 +8,7 @@ function App() {
   });
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
-  })
+  }, [tasks]);
   const toggleCompleted = (id) => {
     setTasks(
       tasks.map((task) =>
@@ -18,19 +18,29 @@ function App() {
       )
     );
   };
-
+  const deleteTask = (id) => {
+    setTasks(tasks.filter((task)=> task.id !== id));
+  }
   const [title, setTitle] = useState('');
   const handleAddTask = () => {
-    if(title === '') return;
-    setTasks([
-      ...tasks,
-      {
-        id: Date.now(),
-        title,
-        completed: false,
-      },
-    ]);
-    setTitle('');
+    const trimmedTitle = title.trim();
+
+if (trimmedTitle === '') {
+  setTitle('');
+  return;
+}
+
+setTasks([
+  ...tasks,
+  {
+    id: Date.now(),
+    title: trimmedTitle,
+    completed: false,
+  },
+]);
+
+setTitle('');
+
   };
 
   return (
@@ -48,7 +58,7 @@ function App() {
 
       <ul>
         {tasks.map((task) => (
-          <li key={task.id}>
+          <li key={task.id} style={{ display: 'flex', gap: '1rem' }}>
             <input
               type='checkbox'
               checked={task.completed}
@@ -65,6 +75,7 @@ function App() {
             >
               {task.title}
             </span>
+            <button onClick={() => deleteTask(task.id)}>削除</button>
           </li>
         ))}
       </ul>
