@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import TaskInput from "./components/TaskInput";
+import TaskItems from "./components/TaskItems";
 
 /**
  * タスク1件の型定義
@@ -95,35 +96,11 @@ function App() {
         onAdd={handleAddTask}
       />
 
-      <ul>
-        {tasks.map((task) => (
-          <li
-            key={task.id}
-            style={{ display: "flex", gap: "1rem" }}
-          >
-            <input
-              type="checkbox"
-              checked={task.completed}
-              onChange={() => toggleCompleted(task.id)}
-            />
-            <span
-              onClick={() => toggleCompleted(task.id)}
-              style={{
-                cursor: "pointer",
-                textDecoration: task.completed
-                  ? "line-through"
-                  : "none",
-                color: task.completed ? "#888" : "#000",
-              }}
-            >
-              {task.title}
-            </span>
-            <button onClick={() => deleteTask(task.id)}>
-              削除
-            </button>
-          </li>
-        ))}
-      </ul>
+      <TaskItems
+        tasks={tasks}
+        onToggle={toggleCompleted}
+        onDelete={deleteTask}
+      />
     </main>
   );
 }
