@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import TaskInput from "./components/TaskInput";
 
 /**
  * タスク1件の型定義
@@ -24,7 +25,7 @@ function App() {
   });
 
   /** 入力中のタスクタイトル
-   * @type {string} 
+   * @type {string}
   */
   const [title, setTitle] = useState("");
 
@@ -88,14 +89,11 @@ function App() {
     <main style={{ padding: "2rem" }}>
       <h1>Task Manager</h1>
 
-      <div>
-        <input
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <button onClick={handleAddTask}>追加</button>
-      </div>
+      <TaskInput
+        title={title}
+        onChange={setTitle}
+        onAdd={handleAddTask}
+      />
 
       <ul>
         {tasks.map((task) => (
