@@ -7,7 +7,13 @@
  * @return {JSX.Element}
  */
 
-function TaskInput({ title, onChange, onAdd }) {
+type Props = {
+  title: string;
+  onChange: (value: string) => void;
+  onAdd: () => void;
+}
+
+function TaskInput({ title, onChange, onAdd }: Props) {
   return(
     <div>
       <input

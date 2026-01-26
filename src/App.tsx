@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import TaskInput from "./components/TaskInput";
 import TaskItems from "./components/TaskItems";
+import type { Task } from "./types/task";
 
 /**
  * タスク1件の型定義
@@ -20,7 +21,7 @@ function App() {
    * タスク一覧
    * @type {Task[]}
    */
-  const [tasks, setTasks] = useState(() => {
+  const [tasks, setTasks] = useState<Task[]>(() => {
     const savedTasks = localStorage.getItem("tasks");
     return savedTasks ? JSON.parse(savedTasks) : [];
   });
@@ -28,7 +29,7 @@ function App() {
   /** 入力中のタスクタイトル
    * @type {string}
   */
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState<string>("");
 
   /** tasks が変わるたびに localStorage へ保存 */
   useEffect(() => {
@@ -65,7 +66,7 @@ function App() {
    * @param {number} id タスクID
    * @return {void}
    */
-  const toggleCompleted = (id) => {
+  const toggleCompleted = (id: number): void => {
     setTasks((prevTasks) =>
       prevTasks.map((task) =>
         task.id === id
@@ -80,7 +81,7 @@ function App() {
    * @param {number} id タスクID
    * @return {void}
    */
-  const deleteTask = (id) => {
+  const deleteTask = (id: number): void => {
     setTasks((prevTasks) =>
       prevTasks.filter((task) => task.id !== id),
     );
