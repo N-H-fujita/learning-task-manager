@@ -4,14 +4,6 @@ import TaskItems from "./components/TaskItems";
 import type { Task } from "./types/task";
 
 /**
- * タスク1件の型定義
- * @typedef {Object} Task
- * @property {number} id
- * @property {string} title
- * @property {boolean} completed
- */
-
-/**
  * Task Manager App
  * - localStorage にタスクを保存
  * - タスクの追加 / 完了切り替え / 削除が可能

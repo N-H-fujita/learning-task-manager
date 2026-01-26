@@ -1,16 +1,9 @@
 import type { Task } from "../types/task";
-/**
- * タスク一覧を表示するコンポーネント
- * @param {Object} props
- * @param {Task[]} props.tasks タスク一覧
- * @param {(id: number) => void} props.onToggle 完了状態切り替え
- * @param {(id: number) => void} props.onDelete タスク削除
- * @return {JSX.Element}
- */
+
 type Props = {
   tasks: Task[];
-  onToggle: (value: number) => void;
-  onDelete: (value: number) => void;
+  onToggle: (id: number) => void;
+  onDelete: (id: number) => void;
 }
 function TaskItems({ tasks, onToggle, onDelete }: Props) {
   return (
